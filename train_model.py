@@ -38,3 +38,4 @@ X_test, y_test, encoder, lb = process_data(
 model = train_model(X_train, y_train)
 # Train and save a model.
 dump(model, 'model/random_forest.joblib')
+dump(encoder, 'model/encoder.joblib')
