@@ -21,15 +21,13 @@ cat_features = [
 ]
 
 
-def metrics(data, education):
+def metrics(data, education, lb):
     data = data[data.education == education]
     model = load('model/random_forest.joblib')
     encoder = load('model/encoder.joblib')
-    lb = LabelBinarizer()
     X, y, encoder, lb = process_data(
         data, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
-    y = lb.fit_transform(y)
     preds = inference(model, X)
     return compute_model_metrics(y, preds)
 
@@ -61,7 +59,7 @@ dump(encoder, 'model/encoder.joblib')
 
 output_list = []
 for ed_name in education_set:
-    output_list.append((ed_name, *metrics(data, ed_name)))
+    output_list.append((ed_name, *metrics(data, ed_name, lb)))
 
 output = '\n'.join([' '.join([str(char) for char in line]) for line in output_list])
 with open('slice_output.txt', 'w') as f:
