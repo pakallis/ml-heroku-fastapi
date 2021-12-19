@@ -28,6 +28,7 @@ cat_features = [
     "native-country",
 ]
 
+
 def test_preprocess_data(data):
     X_train, y_train, encoder, lb = process_data(data, cat_features, label='salary', training=True)
     assert all(y == 0 or y == 1 for y in y_train)
@@ -54,4 +55,3 @@ def test_inference(model):
     X = [[0, 0]]
     predictions = inference(model, X)
     assert predictions == [1]
-

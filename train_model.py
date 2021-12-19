@@ -63,7 +63,6 @@ output_list = []
 for ed_name in education_set:
     output_list.append((ed_name, *metrics(data, ed_name)))
 
-output = '\n'.join([' '.join([str(l) for l in line]) for line in output_list])
+output = '\n'.join([' '.join([str(char) for char in line]) for line in output_list])
 with open('slice_output.txt', 'w') as f:
     f.write(str(output))
-
