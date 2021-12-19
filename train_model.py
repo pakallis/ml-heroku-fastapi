@@ -4,7 +4,6 @@ import logging
 from joblib import dump, load
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelBinarizer
 
 from ml.data import process_data
 from ml.model import train_model, compute_model_metrics, inference
@@ -14,13 +13,13 @@ from ml.const import cat_features
 logging.basicConfig(level=logging.INFO)
 
 
-
 def metrics(data, education, lb):
     data = data[data.education == education]
     model = load('model/random_forest.joblib')
     encoder = load('model/encoder.joblib')
     X, y, encoder, lb = process_data(
-        data, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+        data, categorical_features=cat_features,
+        label="salary", training=False, encoder=encoder, lb=lb
     )
     preds = inference(model, X)
     return compute_model_metrics(y, preds)
@@ -39,7 +38,8 @@ X_train, y_train, encoder, lb = process_data(
 )
 
 X_test, y_test, encoder, lb = process_data(
-    train, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+    train, categorical_features=cat_features,
+    label="salary", training=False, encoder=encoder, lb=lb
 )
 
 

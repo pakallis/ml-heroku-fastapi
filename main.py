@@ -35,7 +35,7 @@ class Inference(BaseModel):
 async def inference(data: Inference):
     model = load('model/random_forest.joblib')
     encoder = load('model/encoder.joblib')
-    df = pd.DataFrame(dict((k,[v]) for k,v in data.__dict__.items()))
+    df = pd.DataFrame(dict((k, [v]) for k, v in data.__dict__.items()))
     features = [c.replace('-', '_') for c in cat_features]
     X, _, _, _ = process_data(df, categorical_features=features, training=False, encoder=encoder)
     salary_class = ml.model.inference(model, X)[0]
