@@ -1,12 +1,22 @@
+import os
+
 from joblib import load
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
+
 import ml.model
 from ml.data import process_data
 from ml.const import cat_features
 
 app = FastAPI()
+
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("Pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
 
 
 @app.get("/")
