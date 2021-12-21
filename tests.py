@@ -49,10 +49,9 @@ def test_compute_model_metrics():
 def test_train_and_inference():
     X_train = [[0, 0]]
     y_train = [1]
-    return train_model(X_train, y_train)
+    model = train_model(X_train, y_train)
 
-
-    predictions = inference(model, X)
+    predictions = inference(model, X_train)
     assert predictions == [1]
 
 
