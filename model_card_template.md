@@ -39,3 +39,8 @@ especially for race and sex variables.
 
 
 ## Caveats and Recommendations
+
+We have a few samples for people with marital status widowed and other races than white, which might cause our model to misbehave in those classes.
+
+Ideally, we would like to have more data in thos classes.
+
