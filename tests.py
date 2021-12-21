@@ -12,13 +12,6 @@ def data():
     return pd.read_csv('data/census.csv')
 
 
-@pytest.fixture()
-def model():
-    X_train = [[0, 0]]
-    y_train = [1]
-    return train_model(X_train, y_train)
-
-
 cat_features = [
     "workclass",
     "education",
@@ -53,8 +46,12 @@ def test_compute_model_metrics():
     assert fbeta == 1
 
 
-def test_inference(model):
-    X = [[0, 0]]
+def test_train_and_inference():
+    X_train = [[0, 0]]
+    y_train = [1]
+    return train_model(X_train, y_train)
+
+
     predictions = inference(model, X)
     assert predictions == [1]
 
